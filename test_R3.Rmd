@@ -1,0 +1,44 @@
+---
+title: 'EDA for Project 1: Beer and Brewery in the States'
+author: "Hao Wang, Alex Salamah"
+date: "October 2019"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: github
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Get the data
+```{r, include=FALSE}
+setwd("C:/Edu/GitHub_DDS/Unit 8")
+BeersDF <- read.csv(file = "Beers.csv", header = TRUE)
+BreweriesDF <- read.csv(file = "Breweries.csv", header = TRUE)
+```
+
+# Active library
+```{r, include = FALSE}
+# Visualization
+library(tidyverse)
+```
+
+# 1. How many breweries are present in each state?
+```{r, echo = FALSE}
+# Count breweries in each state
+table(BreweriesDF$State)
+
+Brew_Num <- BreweriesDF %>%
+  group_by(State) %>%
+  dplyr::summarize(count=n())
+     
+# Plot
+Brew_Num$State = factor(Brew_Num$State, level = Brew_Num$State[order(-Brew_Num$count)]) 
+Brew_Num %>% 
+  ggplot(aes(x=State, y=count, fill=State))+geom_bar(stat = "identity", width = 0.8) +
+  ylab("Brewery")+ggtitle("Brewery vs State")+
+  geom_text(aes(label=count), hjust=0.4, vjust=-0.3, size=3) +
+  theme(axis.text.x = element_text(size=7, angle=90))
+```
