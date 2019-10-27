@@ -16,3 +16,6 @@ EDAforProject1_R5.HTML: HTML file created with Knit.
 
 **Readme file:**  
 README.md: This file for illustrating the project files structure.  
+
+**YouTube video for presentation:**  
+https://youtu.be/DVeZcpDTUmE  
